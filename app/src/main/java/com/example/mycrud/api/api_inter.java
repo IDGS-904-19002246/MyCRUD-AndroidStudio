@@ -23,12 +23,12 @@ public interface api_inter {
     @POST("t_empleados.php")
     Call<String>anadir(
             @Field("nombre")String nombre,
-            @Field("apellidoP")String descripcion,
-            @Field("apellidoM")String nivel_educativo,
-            @Field("telefono")String salario_promedio,
-            @Field("salario")int puestos_disponibles,
-            @Field("puesto")String titulados,
-            @Field("estado")String ingles_nivel
+            @Field("apellidoP")String apellidoP,
+            @Field("apellidoM")String apellidoM,
+            @Field("telefono")String telefono,
+            @Field("salario")int salario,
+            @Field("puesto")String puesto,
+            @Field("estado")String estado
     );
     @PUT("t_empleados.php")
     Call<String>modificar(

@@ -35,19 +35,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/subtitulo_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
 
-                android:background="@color/blue_1"
-                android:textColor="@color/white"
-                android:text="@string/subtitulo_main"
-
-
-                android:textSize="24sp"
-                android:layout_marginTop="8dp"
-                android:paddingHorizontal="32dp" />
 
             <TextView
                 android:id="@+id/titulo_lista"

@@ -14,16 +14,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycrud.FormActivity;
 import com.example.mycrud.R;
+import com.example.mycrud.api.api_inter;
+import com.example.mycrud.api.retro;
 import com.example.mycrud.models.clase_empleados;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AdaClientes extends RecyclerView.Adapter<AdaClientes.Vista>{
     private Context C;
     private List<clase_empleados> Lista;
+    api_inter api;
+
     public AdaClientes(Context C, List<clase_empleados> Lista) {
         this.C = C;
         this.Lista = Lista;
+        api = retro.getClient().create(api_inter.class);
+
     }
 //    private OnClientesClickListener onClientesClickListener;
 //    public interface OnClientesClickListener { void onClientesClick(ClsClientes Cli);}
@@ -41,14 +51,26 @@ public class AdaClientes extends RecyclerView.Adapter<AdaClientes.Vista>{
 
     @Override
     public void onBindViewHolder(@NonNull Vista holder, int position) {
+        int p = position;
         final clase_empleados item = Lista.get(position);
         holder.titulo.setText(item.getNombre());
-        holder.subtitulo.setText(item.getPuesto()+ " ["+String.valueOf(item.getSalario())+"]");
+        holder.subtitulo.setText(item.getPuesto()+ " [ $"+String.valueOf(item.getSalario())+"]");
 
-        holder.btn_borrar.setOnClickListener(v ->
+        holder.btn_borrar.setOnClickListener(v -> {
+            Call<String> call = api.BORRAR(item.getId_empleado());
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    Toast.makeText(C, "Se borro a: " + item.getNombre().toString()+" "+item.getApellidoP(), Toast.LENGTH_SHORT).show();
+                    holder.itemView.setVisibility(View.GONE);
+                    Lista.remove(p);
+                    notifyItemRemoved(p);
+                }
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {}
+            });
 
-                Toast.makeText(C, "My id is: "+item.getTelefono(), Toast.LENGTH_SHORT).show()
-        );
+        });
         holder.btn_editar.setOnClickListener(v -> {
             Intent intent = new Intent(C, FormActivity.class);
             intent.putExtra(FormActivity.CLI_KEY, item);

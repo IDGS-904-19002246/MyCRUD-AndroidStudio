@@ -1,5 +1,6 @@
 package com.example.mycrud;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mycrud.api.api_inter;
 import com.example.mycrud.api.retro;
 import com.example.mycrud.databinding.ActivityFormBinding;
-import com.example.mycrud.models.ClsClientes;
 import com.example.mycrud.models.clase_empleados;
 
 import java.util.ArrayList;
@@ -31,8 +31,6 @@ public class FormActivity extends AppCompatActivity {
     public List<String> list_estados = new ArrayList<>(Arrays.asList("Ciudad de México","Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila de Zaragoza","Colima","Chiapas","Chihuahua","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco","México","Michoacán de Ocampo","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo","San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz de Ignacio de la Llave","Yucatán","Zacatecas"));
     public String str_estado, str_municipio;
     api_inter api;
-//    private GoogleMap mMap;
-//    private static final LatLng MI_UBICACION = new LatLng(-34, 151);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +49,15 @@ public class FormActivity extends AppCompatActivity {
                 Toast.makeText(this, "Se necesita Telefono valido", Toast.LENGTH_SHORT).show();
             } else if (b.telefono.getText().toString().trim().length() != 10) {
                 Toast.makeText(this, "Se necesita Telefono valido", Toast.LENGTH_SHORT).show();
+            } else if (b.salario.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Se necesita un salario valido", Toast.LENGTH_SHORT).show();
+            } else if (b.puesto.getText().toString().isEmpty() || b.puesto.getText().toString().equals(" ")) {
+                Toast.makeText(this, "Se necesita un puesto valido", Toast.LENGTH_SHORT).show();
+            } else if (b.estado.getText().toString().isEmpty() || b.estado.getText().toString().equals(" ")) {
+                Toast.makeText(this, "Se necesita un estado valido", Toast.LENGTH_SHORT).show();
             } else {
                 if (extras == null) {
-                    Toast.makeText(this, "" + (0 + Integer.parseInt(b.Cp.getText().toString())), Toast.LENGTH_SHORT).show();
+
                     insertar(
                             b.nombre.getText().toString(),
                             b.apellidoP.getText().toString(),
@@ -66,6 +70,8 @@ public class FormActivity extends AppCompatActivity {
                     );
 
                     Toast.makeText(this, "Empleado insertado", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
                 } else {
                     actualizar(
                             cliente.getId_empleado(),
@@ -79,6 +85,8 @@ public class FormActivity extends AppCompatActivity {
 
                     );
                     Toast.makeText(this, "Empleado editado", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -109,45 +117,42 @@ public class FormActivity extends AppCompatActivity {
 //            return true;
 //        }
 //    }
-//    public boolean validarEmail(String email) {
-//        if (email.isEmpty()) {
-//            return false;
-//        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            return false;
-//        } else {
-//            return true;
-//        }
-//    }
-//    public void getMunicipios(String E){
-//        Call<ClsMunicipios> call_mun = api.MUNICIPIOS(E);
-//        call_mun.enqueue(new Callback<ClsMunicipios>() {
-//            @Override
-//            public void onResponse(Call<ClsMunicipios> call, Response<ClsMunicipios> response) {
-//                list_municipios = response.body().municipios;
-//                ArrayAdapter<String> adapterMunicipios = new ArrayAdapter<>(FormActivity.this, android.R.layout.simple_spinner_item, list_municipios);
-//                adapterMunicipios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                b.Municipio.setAdapter(adapterMunicipios);
-//            }
-//            @Override
-//            public void onFailure(Call<ClsMunicipios> call, Throwable t) {}
-//        });
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list_municipios);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        b.Municipio.setAdapter(adapter);
-//    }
-//
 
     }
     public void insertar(String nombre , String apellidoP, String apellidoM, String telefono, int salario, String puesto, String estado){
         Call<String> call = api.anadir(
                 nombre, apellidoP, apellidoM, telefono, salario, puesto, estado
         );
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
     public void actualizar(int id, String nombre , String apellidoP, String apellidoM, String telefono, int salario, String puesto, String estado){
         Call<String> call = api.modificar(new clase_empleados(
                 id, nombre, apellidoP, apellidoM, telefono, salario, puesto, estado
                 )
         );
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
     }
+
+
 
 }
