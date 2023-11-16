@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">PruebaMovil-ITSmart</string>
+
+
+    <string name="titulo">MyCrud</string>
+
+
+    <string name="titulo_lista">Listado de empleados</string>
+
+    <string name="editar">Editar</string>
+    <string name="borrar">Borrar</string>
+
+    <string name="titulo_form">Información de empleados</string>
+
+    <!--CLIENTE-->
+
+    <string name="nombre">Nombre</string>
+    <string name="apellidoP">Apellido Paterno</string>
+    <string name="apellidoM">Apellido Materno</string>
+    <string name="telefono">Telefono</string>
+    <string name="salario">Salario</string>
+    <string name="puesto">Puesto</string>
+    <string name="estado">Estado</string>
+
+
+
+</resources>
