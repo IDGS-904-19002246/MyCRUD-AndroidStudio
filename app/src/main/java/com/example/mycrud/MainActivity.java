@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.example.mycrud.adaptadors.AdaClientes;
 import com.example.mycrud.databinding.ActivityMainBinding;
@@ -24,11 +26,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding b;
-    //    private RecyclerView recycler;
-    //    --------------------------------------------------------------------
-    private List<clase_empleados> lista;
-    private AdaClientes adaptador;
-    api_inter api;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,34 +34,20 @@ public class MainActivity extends AppCompatActivity {
         b = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
 
-        b.recycler.setLayoutManager(new LinearLayoutManager(this));
-        lista = new ArrayList<>();
-
-        b.ADD.setOnClickListener(v -> {
-            Intent intent = new Intent(this, FormActivity.class);
+        b.EMP.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EmpleadosActivity.class);
             startActivity(intent);
         });
 
-
-        api = retro.getClient().create(api_inter.class);
-        Call<List<clase_empleados>> call = api.TODOS();
-
-        adaptador = new AdaClientes(MainActivity.this, lista);
-        b.recycler.setAdapter(adaptador);
-        call.enqueue(new Callback<List<clase_empleados>>() {
-            @Override
-            public void onResponse(Call<List<clase_empleados>> call, Response<List<clase_empleados>> response) {
-                lista = response.body();
-                adaptador = new AdaClientes(MainActivity.this, lista);
-                b.recycler.setAdapter(adaptador);
-            }
-
-            @Override
-            public void onFailure(Call<List<clase_empleados>> call, Throwable t) {
-
-            }
+        b.REC.setOnClickListener(v -> {
+            Intent intent = new Intent(this, RecetasActivity.class);
+            startActivity(intent);
         });
 
+        b.TIA.setOnClickListener(v -> {
+            Intent intent = new Intent(this, TianguisActivity.class);
+            startActivity(intent);
+        });
 
     }
 }

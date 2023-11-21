@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PruebaMovil-ITSmart</string>
+    <string name="app_name">MyCRUD</string>
 
 
     <string name="titulo">MyCrud</string>
@@ -22,6 +22,16 @@
     <string name="puesto">Puesto</string>
     <string name="estado">Estado</string>
 
+    <!--TIANGUIS-->
+    <string name="ubicacion">Ubicacion</string>
+    <string name="horaInicio">Hora Inicio</string>
+    <string name="horaFinal">Hora Final</string>
+    <string name="organizador">Organizador</string>
 
+    <!--RECETAS-->
+    <string name="descripcion">Descripcion</string>
+    <string name="costoAprox">Costo Aproximado</string>
+    <string name="paisOrigen">País de Origen</string>
+    <string name="creador">Creador</string>
 
 </resources>

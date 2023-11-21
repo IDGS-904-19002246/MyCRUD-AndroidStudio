@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TianguisFormActivity">
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/blue_1"
+                android:text="@string/titulo"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/titulo_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginVertical="8dp"
+                android:text="Datos del Tianguis"
+                android:textAlignment="center"
+                android:textSize="24sp"
+
+                />
+
+
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+
+                    android:paddingHorizontal="32dp"
+                    android:paddingBottom="32dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView android:text="@string/nombre" style="@style/text_label" />
+                    <EditText
+                        android:id="@+id/nombre"
+                        android:inputType="text" style="@style/text_input"/>
+
+
+                    <TextView android:text="@string/ubicacion" style="@style/text_label" />
+                    <EditText
+                        android:id="@+id/ubicacion"
+                        android:inputType="text" style="@style/text_input"/>
+
+                    <TextView android:text="@string/horaInicio" style="@style/text_label" />
+                    <TimePicker
+                        android:id="@+id/horaInicio"
+                        android:layout_gravity="center"
+                        android:timePickerMode="spinner"
+                        android:layout_height="100dp"
+                        style="@style/text_input"/>
+                    <TextView android:text="@string/horaFinal" style="@style/text_label" />
+                    <TimePicker
+                        android:id="@+id/horaFinal"
+                        android:layout_gravity="center"
+                        android:timePickerMode="spinner"
+                        android:layout_height="100dp"
+                        style="@style/text_input"/>
+                    <TextView android:text="@string/organizador" style="@style/text_label" />
+                    <EditText
+                        android:id="@+id/organizador"
+                        android:inputType="text" style="@style/text_input"/>
+
+
+                    <TextView android:text="@string/estado" style="@style/text_label" />
+                    <EditText
+                        android:id="@+id/estado"
+                        android:inputType="text" style="@style/text_input"/>
+                    <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_guardar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/blue_1"
+                        android:textColor="@color/white"
+
+                        android:text="Guardar"
+                        android:layout_marginTop="64dp"
+                        app:icon="@android:drawable/ic_menu_save"
+                        tools:ignore="MissingConstraints">
+
+                    </com.google.android.material.button.MaterialButton>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

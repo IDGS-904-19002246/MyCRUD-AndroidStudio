@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mycrud.EmpleadosFormActivity;
 import com.example.mycrud.R;
-import com.example.mycrud.api.api_inter;
+import com.example.mycrud.TianguisFormActivity;
+import com.example.mycrud.api.api_tia;
 import com.example.mycrud.api.retro;
 import com.example.mycrud.models.clase_empleados;
+import com.example.mycrud.models.clase_tianguis;
 
 import java.util.List;
 
@@ -24,48 +26,46 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdaClientes extends RecyclerView.Adapter<AdaClientes.Vista>{
+public class AdaTianguis extends RecyclerView.Adapter<AdaTianguis.Vista>{
     private Context C;
-    private List<clase_empleados> Lista;
-    api_inter api_emp;
+    private List<clase_tianguis> Lista;
+    api_tia api_tia;
 
-    public AdaClientes(Context C, List<clase_empleados> Lista) {
+    public AdaTianguis(Context C, List<clase_tianguis> Lista) {
         this.C = C;
         this.Lista = Lista;
-        api_emp = retro.getClient().create(api_inter.class);
-
+        api_tia = retro.getClient().create(api_tia.class);
     }
-    public void actualizarDatos(List<clase_empleados> nuevosDatos) {
+    public void actualizarDatos(List<clase_tianguis> nuevosDatos) {
         Lista = nuevosDatos;
         notifyDataSetChanged();
     }
-//    private OnClientesClickListener onClientesClickListener;
-//    public interface OnClientesClickListener { void onClientesClick(ClsClientes Cli);}
-//
-//    public void setOnPetClickListener(OnClientesClickListener onClientesClickListener) {
-//        this.onClientesClickListener = onClientesClickListener;
-//    }
-//    -----------------------------------------------------------------------------------------
+    //    -----------------------------------------------------------------------------------------
     @NonNull
     @Override
-    public Vista onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdaTianguis.Vista onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View V = LayoutInflater.from(C).inflate(R.layout.item, parent, false);
         return new Vista(V);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Vista holder, int position) {
+    public void onBindViewHolder(@NonNull AdaTianguis.Vista holder, int position) {
         int p = position;
-        final clase_empleados item = Lista.get(position);
-        holder.titulo.setText(item.getNombre());
-        holder.subtitulo.setText(item.getPuesto()+ " [ $"+String.valueOf(item.getSalario())+"]");
+        final clase_tianguis item = Lista.get(position);
+        holder.titulo.setText(item.nombre+ " - "+item.estado);
+        holder.subtitulo.setText(item.ubicacion+" de "+item.horaInicio.substring(0,5)+" - "+item.horaFinal.substring(0,5));
 
+        holder.btn_editar.setOnClickListener(v -> {
+            Intent intent = new Intent(C, TianguisFormActivity.class);
+            intent.putExtra(TianguisFormActivity.KEY, item);
+            C.startActivity(intent);
+        });
         holder.btn_borrar.setOnClickListener(v -> {
-            Call<String> call = api_emp.BORRAR(item.getId_empleado());
+            Call<String> call = api_tia.BORRAR(item.id_tianguis);
             call.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Toast.makeText(C, "Se borro a: " + item.getNombre().toString()+" "+item.getApellidoP(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(C, "Se borro a: " + item.nombre, Toast.LENGTH_SHORT).show();
                     holder.itemView.setVisibility(View.GONE);
                     Lista.remove(p);
                     notifyItemRemoved(p);
@@ -73,20 +73,12 @@ public class AdaClientes extends RecyclerView.Adapter<AdaClientes.Vista>{
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {}
             });
-
         });
-        holder.btn_editar.setOnClickListener(v -> {
-            Intent intent = new Intent(C, EmpleadosFormActivity.class);
-            intent.putExtra(EmpleadosFormActivity.CLI_KEY, item);
-            C.startActivity(intent);
-        });
-
     }
 
     @Override
     public int getItemCount() {return Lista.size();}
-//    -----------------------------------------------------------------------------------------
-
+    //    -----------------------------------------------------------------------------------------
     public class Vista extends RecyclerView.ViewHolder{
         TextView titulo, subtitulo;
         Button btn_editar, btn_borrar;

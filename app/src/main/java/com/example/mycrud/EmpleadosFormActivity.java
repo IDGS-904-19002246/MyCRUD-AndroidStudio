@@ -2,17 +2,13 @@ package com.example.mycrud;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mycrud.api.api_inter;
 import com.example.mycrud.api.retro;
-import com.example.mycrud.databinding.ActivityFormBinding;
+import com.example.mycrud.databinding.ActivityEmpleadosformBinding;
 import com.example.mycrud.models.clase_empleados;
 
 import java.util.ArrayList;
@@ -23,23 +19,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FormActivity extends AppCompatActivity {
-    private ActivityFormBinding b;
+public class EmpleadosFormActivity extends AppCompatActivity {
+    private ActivityEmpleadosformBinding b;
     public static final String CLI_KEY = "cli";
     public clase_empleados cliente;
     public List<String> list_municipios = new ArrayList<>();
     public List<String> list_estados = new ArrayList<>(Arrays.asList("Ciudad de México","Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila de Zaragoza","Colima","Chiapas","Chihuahua","Durango","Guanajuato","Guerrero","Hidalgo","Jalisco","México","Michoacán de Ocampo","Morelos","Nayarit","Nuevo León","Oaxaca","Puebla","Querétaro","Quintana Roo","San Luis Potosí","Sinaloa","Sonora","Tabasco","Tamaulipas","Tlaxcala","Veracruz de Ignacio de la Llave","Yucatán","Zacatecas"));
     public String str_estado, str_municipio;
-    api_inter api;
+    api_inter api_emp = retro.getClient().create(api_inter.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
-        b = ActivityFormBinding.inflate(getLayoutInflater());
+        setContentView(R.layout.activity_empleadosform);
+        b = ActivityEmpleadosformBinding.inflate(getLayoutInflater());
         setContentView(b.getRoot());
-        Bundle extras = getIntent().getExtras();
-        api = retro.getClient().create(api_inter.class);
 
+        Bundle extras = getIntent().getExtras();
 
 //      --------------------------------------------------------------------------
         b.btnGuardar.setOnClickListener(v -> {
@@ -120,7 +115,7 @@ public class FormActivity extends AppCompatActivity {
 
     }
     public void insertar(String nombre , String apellidoP, String apellidoM, String telefono, int salario, String puesto, String estado){
-        Call<String> call = api.anadir(
+        Call<String> call = api_emp.anadir(
                 nombre, apellidoP, apellidoM, telefono, salario, puesto, estado
         );
         call.enqueue(new Callback<String>() {
@@ -136,7 +131,7 @@ public class FormActivity extends AppCompatActivity {
         });
     }
     public void actualizar(int id, String nombre , String apellidoP, String apellidoM, String telefono, int salario, String puesto, String estado){
-        Call<String> call = api.modificar(new clase_empleados(
+        Call<String> call = api_emp.modificar(new clase_empleados(
                 id, nombre, apellidoP, apellidoM, telefono, salario, puesto, estado
                 )
         );

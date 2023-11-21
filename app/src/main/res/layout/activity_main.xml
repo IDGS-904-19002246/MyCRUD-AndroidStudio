@@ -12,69 +12,79 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/titulo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+
+            android:background="@color/blue_1"
+            android:gravity="center"
+            android:text="@string/titulo"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titulo_lista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginVertical="8dp"
+            android:text="Lista de CRUD'S"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/titulo_lista">
 
-            <TextView
-                android:id="@+id/titulo"
+            <Button
+                android:id="@+id/EMP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:background="@color/blue_1"
-                android:text="@string/titulo"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-
-
-            <TextView
-                android:id="@+id/titulo_lista"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginVertical="8dp"
-                android:text="@string/titulo_lista"
-                android:textAlignment="center"
-                android:textSize="24sp"
-
+                android:text="CRUD de Empleados"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginVertical="32dp"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-
-                android:id="@+id/recycler"
+            <Button
+                android:id="@+id/TIA"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
+                android:layout_height="wrap_content"
+                android:text="CRUD de Tianguis"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/EMP"
+                android:layout_marginVertical="32dp"
+                />
 
-                android:paddingHorizontal="32dp"
-                tools:listitem="@layout/item"
-                tools:ignore="MissingConstraints" />
+            <Button
+                android:id="@+id/REC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CRUD de Recetas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TIA"
+                android:layout_marginVertical="32dp"
+                />
 
-        </LinearLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/ADD"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            android:backgroundTint="@color/blue_1"
-
-            android:clickable="true"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

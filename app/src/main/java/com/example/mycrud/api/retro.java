@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class retro {
-    private static final String URL = "http://192.168.1.10/profeciones_api/";
+    private static final String URL = "http://192.168.1.14/profeciones_api/";
 
 //    private static final String URL = "http://192.168.137.207/profeciones_api/";
     private static Retrofit retro;
@@ -16,5 +16,7 @@ public class retro {
                     .build();
         }
         return retro;
-    }
+//    }
+
+}
 }
